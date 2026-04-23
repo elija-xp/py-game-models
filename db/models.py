@@ -2,14 +2,8 @@ from django.db import models
 
 
 class Race(models.Model):
-    NAME_CHOICES = [
-        ("new", "New"),
-        ("paid", "Paid"),
-        ("shipped", "Shipped"),
-    ]
     name = models.CharField(
-        max_length=125,
-        choices=NAME_CHOICES,
+        max_length=255,
         unique=True
     )
     description = models.TextField(
@@ -61,7 +55,8 @@ class Player(models.Model):
     guild = models.ForeignKey(
         Guild,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name="players"
     )
     created_at = models.DateTimeField(
         auto_now_add=True
